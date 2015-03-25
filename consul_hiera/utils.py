@@ -1,13 +1,28 @@
+import fnmatch
 import os
 
 import yaml
 
-from consul_hiera import HieraConfig
 from consul_hiera import (
+    HieraConfig,
     HIERARCHY,
 )
 
-import os
+def find_files(directory, pattern='*'):
+    if not os.path.exists(directory):
+        raise ValueError("Directory not found {}".format(directory))
+    if not os.path.isdir(directory):
+        raise ValueError("File not directory: {}".format(directory))
+
+    matches = []
+    for root, dirnames, filenames in os.walk(directory):
+        for filename in fnmatch.filter(filenames, pattern):
+            matches.append(os.path.join(root, filename))
+    return matches
+
+
+def find_yaml_files(directory):
+    return find_files(directory, pattern='*.yaml')
 
 
 def parse_hiera_config(config_path):
