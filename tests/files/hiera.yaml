@@ -1,0 +1,16 @@
+---
+:backends:
+  - yaml
+:yaml:
+  :datadir: /etc/puppet/environments/%{::environment}/hiera/
+:hierarchy:
+  - customer/%{customer}/nodes/%{clientcert}
+  - customer/%{customer}/%{program}/%{deploy_environment}/%{role}
+  - customer/%{customer}/%{program}/%{deploy_environment}/%{deploy_environment}
+  - customer/%{customer}/%{program}/%{program}
+  - customer/%{customer}/%{customer}
+  - deploy_environment/%{deploy_environment}
+  - location/%{location}
+  - operatingsystem/%{operatingsystem}
+
+:merge_behavior: deeper
