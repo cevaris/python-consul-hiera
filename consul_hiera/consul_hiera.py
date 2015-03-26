@@ -2,8 +2,11 @@ HIERARCHY=':hierarchy'
 
 class HieraConfig(object):
     def __init__(self):
-        self.yaml_doc = ""
+        self._yaml_doc = ""
         self.hierarchy = []
+
+    def validate(self):
+        return False
 
 
 class ConsulHiera(object):
